@@ -19,9 +19,13 @@ export const SearchBar = () => {
   const isUrl = (text: string) => {
     if (!text || text.trim().length < 4) return false;
     
-    // Check for common URL patterns
+    const trimmedText = text.trim();
+    // Check for URLs starting with http/https or www or domain patterns
     const urlPattern = /^(https?:\/\/|www\.|[a-zA-Z0-9-]+\.[a-zA-Z]{2,})/i;
-    return urlPattern.test(text.trim());
+    const isUrlMatch = urlPattern.test(trimmedText);
+    
+    console.log('URL Check:', { text: trimmedText, isUrl: isUrlMatch });
+    return isUrlMatch;
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
