@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+
+import React, { useState, useMemo } from 'react';
 import { Button } from '@/components/ui/button';
 import { searchRecipes } from '@/api/search';
 
@@ -28,6 +29,11 @@ export const SearchBar = () => {
     return isUrlMatch;
   };
 
+  // Use useMemo to compute placeholder based on current query
+  const placeholder = useMemo(() => {
+    return isUrl(query) ? "Add this recipe to your collection..." : "Quick vegetarian lunch with coconut…";
+  }, [query]);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!query.trim()) return;
@@ -47,7 +53,6 @@ export const SearchBar = () => {
   };
 
   const suggestions = [
-    'Quick lunch',
     'High-protein dinner', 
     'Kids\' snack',
     'Vegetarian meal'
@@ -69,7 +74,7 @@ export const SearchBar = () => {
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder={isUrl(query) ? "Add this recipe to your collection..." : "Quick vegetarian lunch with coconut…"}
+            placeholder={placeholder}
             className="flex-1 px-4 py-3 sm:px-5 sm:py-3 bg-transparent border-0 rounded-full text-base placeholder:text-muted-foreground focus:outline-none min-h-[48px] sm:min-h-[52px]"
             aria-label="Search for recipes"
             autoComplete="off"
