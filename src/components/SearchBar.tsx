@@ -15,6 +15,15 @@ const SuggestionChip = ({ children, onClick }: { children: React.ReactNode; onCl
 export const SearchBar = () => {
   const [query, setQuery] = useState('');
   const [isSearching, setIsSearching] = useState(false);
+  
+  const isUrl = (text: string) => {
+    try {
+      new URL(text);
+      return true;
+    } catch {
+      return text.startsWith('http://') || text.startsWith('https://') || text.includes('.');
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -35,7 +44,6 @@ export const SearchBar = () => {
   };
 
   const suggestions = [
-    'Add Recipe',
     'Quick lunch',
     'High-protein dinner', 
     'Kids\' snack',
@@ -58,7 +66,7 @@ export const SearchBar = () => {
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Quick vegetarian lunch with coconut…"
+            placeholder={isUrl(query) ? "Add this recipe to your collection..." : "Quick vegetarian lunch with coconut…"}
             className="flex-1 px-4 py-3 sm:px-5 sm:py-3 bg-transparent border-0 rounded-full text-base placeholder:text-muted-foreground focus:outline-none min-h-[48px] sm:min-h-[52px]"
             aria-label="Search for recipes"
             autoComplete="off"
