@@ -35,11 +35,11 @@ export const SearchBar = () => {
   };
 
   const suggestions = [
+    'Add Recipe',
     'Quick lunch',
     'High-protein dinner', 
     'Kids\' snack',
-    'Vegetarian meal',
-    'Dessert'
+    'Vegetarian meal'
   ];
 
   const handleChipClick = (suggestion: string) => {
@@ -63,14 +63,6 @@ export const SearchBar = () => {
             aria-label="Search for recipes"
             autoComplete="off"
           />
-          <Button
-            type="submit"
-            disabled={!query.trim() || isSearching}
-            className="mr-1.5 sm:mr-2 px-4 sm:px-6 py-2 text-sm font-medium rounded-full border border-search-border bg-background hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:opacity-50 min-h-[44px] sm:min-h-[48px]"
-            variant="outline"
-          >
-            {isSearching ? 'Searching...' : 'Ask'}
-          </Button>
         </div>
       </form>
 
