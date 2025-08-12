@@ -5,7 +5,7 @@ import { searchRecipes } from '@/api/search';
 const SuggestionChip = ({ children, onClick }: { children: React.ReactNode; onClick?: () => void }) => (
   <button
     onClick={onClick}
-    className="inline-flex items-center px-4 py-2 text-sm font-medium rounded-full border border-search-border bg-chip-bg hover:bg-chip-hover transition-colors whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+    className="inline-flex items-center px-3 sm:px-4 py-2 sm:py-2.5 text-sm font-medium rounded-full border border-search-border bg-chip-bg hover:bg-chip-hover active:bg-chip-hover transition-colors whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-1 min-h-[40px] touch-manipulation"
     type="button"
   >
     {children}
@@ -47,9 +47,9 @@ export const SearchBar = () => {
   };
 
   return (
-    <div className="w-full max-w-2xl mx-auto px-4">
+    <div className="w-full max-w-2xl mx-auto px-3 sm:px-4">
       <form onSubmit={handleSubmit} className="relative">
-        <div className="relative flex items-center border border-search-border rounded-full bg-search-bg hover:border-search-focus focus-within:border-search-focus focus-within:ring-2 focus-within:ring-ring transition-all">
+        <div className="relative flex items-center border border-search-border rounded-full bg-search-bg hover:border-search-focus focus-within:border-search-focus focus-within:ring-2 focus-within:ring-ring transition-all shadow-sm">
           <label htmlFor="search" className="sr-only">
             Search for recipes
           </label>
@@ -59,14 +59,14 @@ export const SearchBar = () => {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Quick vegetarian lunch with coconut…"
-            className="flex-1 px-5 py-3 bg-transparent border-0 rounded-full text-base placeholder:text-muted-foreground focus:outline-none"
+            className="flex-1 px-4 py-3 sm:px-5 sm:py-3 bg-transparent border-0 rounded-full text-base placeholder:text-muted-foreground focus:outline-none min-h-[48px] sm:min-h-[52px]"
             aria-label="Search for recipes"
             autoComplete="off"
           />
           <Button
             type="submit"
             disabled={!query.trim() || isSearching}
-            className="mr-2 px-6 py-2 text-sm font-medium rounded-full border border-search-border bg-background hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:opacity-50 min-h-[44px]"
+            className="mr-1.5 sm:mr-2 px-4 sm:px-6 py-2 text-sm font-medium rounded-full border border-search-border bg-background hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:opacity-50 min-h-[44px] sm:min-h-[48px]"
             variant="outline"
           >
             {isSearching ? 'Searching...' : 'Ask'}
@@ -75,7 +75,7 @@ export const SearchBar = () => {
       </form>
 
       {/* Suggestion chips */}
-      <div className="flex gap-3 mt-4 overflow-x-auto pb-2 scrollbar-hide">
+      <div className="flex gap-2 sm:gap-3 mt-3 sm:mt-4 overflow-x-auto pb-2 scrollbar-hide">
         {suggestions.map((suggestion) => (
           <SuggestionChip
             key={suggestion}
