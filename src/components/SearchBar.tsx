@@ -17,12 +17,11 @@ export const SearchBar = () => {
   const [isSearching, setIsSearching] = useState(false);
   
   const isUrl = (text: string) => {
-    try {
-      new URL(text);
-      return true;
-    } catch {
-      return text.startsWith('http://') || text.startsWith('https://') || text.includes('.');
-    }
+    if (!text || text.trim().length < 4) return false;
+    
+    // Check for common URL patterns
+    const urlPattern = /^(https?:\/\/|www\.|[a-zA-Z0-9-]+\.[a-zA-Z]{2,})/i;
+    return urlPattern.test(text.trim());
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
